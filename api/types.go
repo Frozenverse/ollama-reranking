@@ -285,6 +285,7 @@ type Options struct {
 	PresencePenalty  float32  `json:"presence_penalty,omitempty"`
 	FrequencyPenalty float32  `json:"frequency_penalty,omitempty"`
 	Stop             []string `json:"stop,omitempty"`
+	Reranking        bool     `json:"reranking,omitempty"`
 }
 
 // Runner options which must be set when the model is loaded into memory
@@ -344,6 +345,25 @@ type EmbeddingRequest struct {
 // EmbeddingResponse is the response from [Client.Embeddings].
 type EmbeddingResponse struct {
 	Embedding []float64 `json:"embedding"`
+}
+
+// RerankRequest is the request passed to [Client.Rerank].
+type RerankRequest struct {
+	Model     string                 `json:"model"`
+	Query     string                 `json:"query"`
+	TopN      int                    `json:"top_n"`     // return top N documents
+	Documents []string               `json:"documents"` // list of documents to rerank
+	KeepAlive *Duration              `json:"keep_alive,omitempty"`
+	Options   map[string]interface{} `json:"options,omitempty"`
+}
+
+// RerankResponse is the response from [Client.Rerank].
+type RerankResponse struct {
+	Model   string `json:"model"`
+	Results []struct {
+		Document       string  `json:"document"`
+		RelevanceScore float32 `json:"relevance_score"`
+	} `json:"results"`
 }
 
 // CreateRequest is the request passed to [Client.Create].
