@@ -47,7 +47,7 @@ jobs:
               CGO_CXXFLAGS
               GOFLAGS
               FLAVOR=rocm
-    runs-on: ${{ matrix.arch == 'arm64' && format('{0}-{1}', matrix.os, matrix.arch) || matrix.os }}
+    runs-on: ${{ matrix.arch == 'arm64' && 'ubuntu-latest-arm64' || 'ubuntu-latest' }}
     environment: release
     needs: setup-environment
     env:
@@ -83,7 +83,7 @@ jobs:
     strategy:
       matrix:
         suffix: ['', '-rocm']
-    runs-on: linux
+    runs-on: ubuntu-latest
     environment: release
     needs: [docker-build-push]
     steps:
