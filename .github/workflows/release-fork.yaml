@@ -20,7 +20,7 @@ jobs:
       - name: Set environment
         id: goflags
         run: |
-          echo GOFLAGS="'-ldflags=-w -s \"-X=github.com/ollama/ollama/version.Version=${GITHUB_REF_NAME#v}\" \"-X=github.com/ollama/ollama/server.mode=release\"'" >>$GITHUB_OUTPUT
+          echo GOFLAGS="'-ldflags=-w -s \"-X=github.com/Frozenverse/ollama-reranking/version.Version=${GITHUB_REF_NAME#v}\" \"-X=github.com/Frozenverse/ollama-reranking/server.mode=release\"'" >>$GITHUB_OUTPUT
 
   # Build each Docker variant (OS, arch, and flavor) separately. Using QEMU is unreliable and slower.
   docker-build-push:
