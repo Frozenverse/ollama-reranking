@@ -98,7 +98,7 @@ jobs:
             latest=false
             suffix=${{ matrix.suffix }}
           images: |
-            ollama/ollama
+            frozenverse/ollama-reranking
           tags: |
             type=ref,enable=true,priority=600,prefix=pr-,event=pr
             type=semver,pattern={{version}}
@@ -108,6 +108,6 @@ jobs:
           path: ${{ runner.temp }}
           merge-multiple: true
       - run: |
-          docker buildx imagetools create $(echo '${{ steps.metadata.outputs.json }}' | jq -cr '.tags | map("-t", .) | join(" ")') $(cat *-${{ matrix.suffix }}.txt | xargs printf 'ollama/ollama@%s ')
-          docker buildx imagetools inspect ollama/ollama:${{ steps.metadata.outputs.version }}
+          docker buildx imagetools create $(echo '${{ steps.metadata.outputs.json }}' | jq -cr '.tags | map("-t", .) | join(" ")') $(cat *-${{ matrix.suffix }}.txt | xargs printf 'frozenverse/ollama-reranking@%s ')
+          docker buildx imagetools inspect frozenverse/ollama-reranking:${{ steps.metadata.outputs.version }}
         working-directory: ${{ runner.temp }}
