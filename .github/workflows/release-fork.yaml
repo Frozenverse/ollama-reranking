@@ -25,8 +25,8 @@ jobs:
   # Build each Docker variant (OS, arch, and flavor) separately. Using QEMU is unreliable and slower.
   docker-build-push:
     strategy:
+      fail-fast: false
       matrix:
-        fail-fast: false
         include:
           - os: linux
             arch: arm64
@@ -82,8 +82,8 @@ jobs:
   # Merge Docker images for the same flavor into a single multi-arch manifest
   docker-merge-push:
     strategy:
+      fail-fast: false
       matrix:
-        fail-fast: false
         suffix: ['', '-rocm']
     runs-on: ubuntu-latest
     environment: release
