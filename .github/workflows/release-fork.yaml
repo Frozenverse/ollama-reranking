@@ -26,6 +26,7 @@ jobs:
   docker-build-push:
     strategy:
       matrix:
+        fail-fast: false
         include:
           - os: linux
             arch: arm64
@@ -82,6 +83,7 @@ jobs:
   docker-merge-push:
     strategy:
       matrix:
+        fail-fast: false
         suffix: ['', '-rocm']
     runs-on: ubuntu-latest
     environment: release
